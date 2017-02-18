@@ -19,23 +19,17 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     private boolean includeChildUrls = true;
 
     protected WebParser webParser;
-    protected ResultPrinter resultPrinter;
+    protected DataPrinter dataPrinter;
 
 
     public AbstractWebCrawler(WebParser webParser,
-                              ResultPrinter resultPrinter) {
+                              DataPrinter dataPrinter) {
         this.webParser = webParser;
-        this.resultPrinter = resultPrinter;
+        this.dataPrinter = dataPrinter;
     }
 
     @Override
-    public void crawl(String urlToCrawl, boolean includeChildUrls) throws URISyntaxException {
-        LOGGER.info("Starting crawling url {urlToCrawl}", urlToCrawl);
-
-        this.setDomainToCrawl(urlToCrawl);
-        this.setIncludeChildUrls(includeChildUrls);
-        crawlUrl(urlToCrawl);
-    }
+    public abstract void crawl(String urlToCrawl, boolean includeChildUrls);
 
     protected abstract void crawlUrl(String urlToCrawl);
 
@@ -63,14 +57,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     }
 
     protected boolean isUrlNotVisited(String url) {
-        boolean isUrlNotVisited;
-        if (Strings.isNullOrEmpty(url)) {
-            isUrlNotVisited = false;
-        } else {
-            isUrlNotVisited = !visitedUrls.contains(url.toLowerCase());
-        }
-
-        return isUrlNotVisited;
+        return !Strings.isNullOrEmpty(url) && !visitedUrls.contains(url.toLowerCase());
     }
 
 
@@ -78,7 +65,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
         return includeChildUrls;
     }
 
-    private void setIncludeChildUrls(boolean includeChildUrls) {
+    protected void setIncludeChildUrls(boolean includeChildUrls) {
         this.includeChildUrls = includeChildUrls;
     }
 }
