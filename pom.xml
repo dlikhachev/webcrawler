@@ -100,7 +100,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>site-crawler-${project.version}</finalName>
+                    <finalName>web-crawler-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
