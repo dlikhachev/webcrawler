@@ -7,23 +7,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientRunner implements CommandLineRunner {
+public class WebCrawlerRunner implements CommandLineRunner {
 
     @Value("${startUrl:www.gocardless.com}")
     private String urlToCrawl;
 
-    @Value("${includeChildLinks:true}")
-    private boolean includeChildLinks;
-
-    @Value("${limitByDomainName:true}")
-    private boolean limitByDomainName;
+    @Value("${includeChildUrls:true}")
+    private boolean includeChildUrls;
 
     @Autowired
-    WebCrawler webCrawler;
+    private WebCrawler webCrawler;
 
 
     @Override
     public void run(String... strings) throws Exception {
-        webCrawler.crawl(urlToCrawl, limitByDomainName, includeChildLinks);
+        webCrawler.crawl(urlToCrawl, includeChildUrls);
     }
 }

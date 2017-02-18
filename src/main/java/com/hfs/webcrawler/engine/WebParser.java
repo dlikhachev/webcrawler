@@ -1,9 +1,8 @@
 package com.hfs.webcrawler.engine;
 
-
 import com.hfs.webcrawler.data.UrlData;
 
-public interface ResultPrinter {
+public interface WebParser {
 
-    void printResult(UrlData urlData);
+    UrlData parseUrlData(String url);
 }

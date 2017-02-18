@@ -1,7 +1,11 @@
 package com.hfs.webcrawler;
 
+import com.hfs.webcrawler.engine.ResultPrinter;
 import com.hfs.webcrawler.engine.WebCrawler;
+import com.hfs.webcrawler.engine.WebParser;
+import com.hfs.webcrawler.engine.simple.JsonConsoleResultPrinter;
 import com.hfs.webcrawler.engine.simple.SimpleWebCrawler;
+import com.hfs.webcrawler.engine.simple.SimpleWebParser;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,8 +32,17 @@ public class Application {
     }
 
     @Bean
-    public static WebCrawler webCrawler() {
-        SimpleWebCrawler simpleWebCrawler = new SimpleWebCrawler();
-        return simpleWebCrawler;
+    public static WebParser webPageParser() {
+        return new SimpleWebParser();
+    }
+
+    @Bean
+    public static ResultPrinter resultPrinter() {
+        return new JsonConsoleResultPrinter();
+    }
+
+    @Bean
+    public static WebCrawler webCrawler(WebParser webParser, ResultPrinter resultPrinter) {
+        return new SimpleWebCrawler(webParser, resultPrinter);
     }
 }
