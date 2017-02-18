@@ -7,11 +7,11 @@ import com.hfs.webcrawler.engine.AbstractWebCrawler;
 import com.hfs.webcrawler.engine.ResultPrinter;
 import com.hfs.webcrawler.engine.WebParser;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class SimpleWebCrawler extends AbstractWebCrawler {
-
 
     public SimpleWebCrawler(WebParser webParser, ResultPrinter resultPrinter) {
         super(webParser, resultPrinter);
@@ -32,16 +32,24 @@ public class SimpleWebCrawler extends AbstractWebCrawler {
 
         this.addToVisitedUrls(urlToCrawl);
 
-        UrlData urlData = webParser.parseUrlData(urlToCrawl);
+        //TODO handle exceptions
+        UrlData urlData = null;
+        try {
+            urlData = webParser.parseUrlData(urlToCrawl);
+        } catch (IOException e) {
+            LOGGER.error(e.getLocalizedMessage(), e);
+        }
 
-        resultPrinter.printResult(urlData);
+        if (urlData != null) {
+            resultPrinter.printResult(urlData);
 
-        if (this.shouldChildUrlsBeIncluded()) {
-            ArrayList<String> urls = urlData.getChildUrls();
-            urls.parallelStream().
-                    filter(this::isUrlBelongsToDomainToCrawl).
-                    filter(this::isUrlNotVisited).
-                    forEach(this::crawlUrl);
+            if (this.shouldChildUrlsBeIncluded()) {
+                ArrayList<String> urls = urlData.getChildUrls();
+                urls.parallelStream().
+                        filter(this::isUrlBelongsToDomainToCrawl).
+                        filter(this::isUrlNotVisited).
+                        forEach(this::crawlUrl);
+            }
         }
     }
 }

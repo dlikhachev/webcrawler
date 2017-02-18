@@ -44,6 +44,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
         return this.domainToCrawl;
     }
 
+    //TODO handle exceptions
     protected void setDomainToCrawl(String urlToCrawl) throws URISyntaxException {
         this.domainToCrawl = new URI(urlToCrawl.toLowerCase()).getHost();
         LOGGER.info("Setting domain to crawl {domainToCrawl}", domainToCrawl);
@@ -62,7 +63,14 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     }
 
     protected boolean isUrlNotVisited(String url) {
-        return !Strings.isNullOrEmpty(url) && !visitedUrls.contains(url.toLowerCase());
+        boolean isUrlNotVisited;
+        if (Strings.isNullOrEmpty(url)) {
+            isUrlNotVisited = false;
+        } else {
+            isUrlNotVisited = !visitedUrls.contains(url.toLowerCase());
+        }
+
+        return isUrlNotVisited;
     }
 
 
