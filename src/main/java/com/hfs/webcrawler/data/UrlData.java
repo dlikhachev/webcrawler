@@ -5,9 +5,10 @@ import com.google.common.base.Strings;
 
 import java.util.ArrayList;
 
-public class UrlData {
+public class UrlData<T> {
 
     private String url;
+    private T urlData;
     private ArrayList<String> childUrls;
 
     private ArrayList<String> assets;
@@ -26,6 +27,14 @@ public class UrlData {
         this.url = url;
     }
 
+
+    public T getUrlData() {
+        return urlData;
+    }
+
+    public void setUrlData(T urlData) {
+        this.urlData = urlData;
+    }
 
     public ArrayList<String> getChildUrls() {
         return childUrls;

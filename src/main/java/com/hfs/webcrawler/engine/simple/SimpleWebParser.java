@@ -12,18 +12,15 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 
-public class SimpleWebParser implements WebParser {
+public class SimpleWebParser implements WebParser<Document> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleWebParser.class);
 
     @Override
-    public UrlData parseUrlData(String url) throws IOException {
-        LOGGER.info("Parsing url {url}", url);
+    public UrlData<Document> parse(UrlData<Document> urlData) throws IOException {
+        LOGGER.info("Parsing url {url}", urlData.getUrl());
 
-        UrlData urlData = new UrlData();
-        urlData.setUrl(url);
-
-        Document document = Jsoup.connect(url).get();
+        Document document = urlData.getUrlData();
         fetchAssets(document, urlData);
         fetchChildUrls(document, urlData);
 

@@ -6,10 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hfs.webcrawler.data.UrlData;
 import com.hfs.webcrawler.data.UrlDataMixIn;
 import com.hfs.webcrawler.engine.DataPrinter;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConsoleDataPrinter implements DataPrinter {
+public class ConsoleDataPrinter implements DataPrinter<Document> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleDataPrinter.class);
 
@@ -25,7 +26,7 @@ public class ConsoleDataPrinter implements DataPrinter {
     }
 
     @Override
-    public void print(UrlData urlData) {
+    public void print(UrlData<Document> urlData) {
         try {
             objectMapper.addMixIn(UrlData.class, UrlDataMixIn.class);
             System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(urlData));

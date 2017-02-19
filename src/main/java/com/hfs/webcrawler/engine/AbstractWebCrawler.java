@@ -2,6 +2,7 @@ package com.hfs.webcrawler.engine;
 
 
 import com.google.common.base.Strings;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +19,15 @@ public abstract class AbstractWebCrawler implements WebCrawler {
 
     private boolean includeChildUrls = true;
 
-    protected WebParser webParser;
-    protected DataPrinter dataPrinter;
+    protected WebLoader<Document> webLoader;
+    protected WebParser<Document> webParser;
+    protected DataPrinter<Document> dataPrinter;
 
 
-    public AbstractWebCrawler(WebParser webParser,
-                              DataPrinter dataPrinter) {
+    public AbstractWebCrawler(WebLoader<Document> webLoader,
+                              WebParser<Document> webParser,
+                              DataPrinter<Document> dataPrinter) {
+        this.webLoader = webLoader;
         this.webParser = webParser;
         this.dataPrinter = dataPrinter;
     }
@@ -58,6 +62,10 @@ public abstract class AbstractWebCrawler implements WebCrawler {
 
     protected boolean isUrlNotVisited(String url) {
         return !Strings.isNullOrEmpty(url) && !visitedUrls.contains(url.toLowerCase());
+    }
+
+    public ArrayList<String> getVisitedUrls() {
+        return visitedUrls;
     }
 
 

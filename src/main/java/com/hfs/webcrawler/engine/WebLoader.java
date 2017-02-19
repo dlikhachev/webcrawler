@@ -4,7 +4,7 @@ import com.hfs.webcrawler.data.UrlData;
 
 import java.io.IOException;
 
-public interface WebParser<T> {
+public interface WebLoader<T> {
 
-    UrlData<T> parse(UrlData<T> urlData) throws IOException;
+    UrlData<T> load(String url) throws IOException;
 }

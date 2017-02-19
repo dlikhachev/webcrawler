@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
-public abstract class UrlDataMixIn {
+public abstract class UrlDataMixIn<T> {
 
     @JsonProperty("url")
     public abstract String getUrl();
@@ -15,4 +15,7 @@ public abstract class UrlDataMixIn {
 
     @JsonIgnore
     public abstract ArrayList<String> getChildUrls();
+
+    @JsonIgnore
+    public abstract T getUrlData();
 }

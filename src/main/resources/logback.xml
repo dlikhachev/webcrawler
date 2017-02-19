@@ -1,6 +1,6 @@
 <configuration packagingData="true">
     <!-- in the absence of the class attribute, assume ch.qos.logback.core.hook.DelayingShutdownHook -->
-    <shutdownHook/>
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

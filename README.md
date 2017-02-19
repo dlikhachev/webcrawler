@@ -15,6 +15,7 @@ now you have `[project_directory]/target/web-crawler-1.0.jar` file.
 
 #### Prerequisites
 - Java 8;
+- Maven > 3.x;
 
 #### Running application
 To run application execute the following command:
