@@ -40,11 +40,9 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
 
     @Override
     protected void crawlUrl(String urlToCrawl) {
-        if (Strings.isNullOrEmpty(urlToCrawl) || this.getHostToCrawl() == null) {
-            return;
-        }
-
         this.addToVisitedUrls(urlToCrawl);
+
+        dataPrinter.printDelimiter();
 
         UrlData<Document> urlData = null;
         try {

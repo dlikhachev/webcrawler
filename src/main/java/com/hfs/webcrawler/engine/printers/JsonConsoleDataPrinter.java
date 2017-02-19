@@ -3,7 +3,6 @@ package com.hfs.webcrawler.engine.printers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hfs.webcrawler.engine.data.UrlData;
 import com.hfs.webcrawler.engine.data.UrlDataMixIn;
 import com.hfs.webcrawler.engine.DataPrinter;
@@ -19,7 +18,6 @@ public class JsonConsoleDataPrinter implements DataPrinter<Document> {
 
     public JsonConsoleDataPrinter() {
         this.objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @Override
