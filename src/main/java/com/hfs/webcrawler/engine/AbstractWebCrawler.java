@@ -17,7 +17,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     private String domainToCrawl = null;
     private ArrayList<String> visitedUrls = new ArrayList<>();
 
-    private boolean includeChildUrls = true;
+    private boolean excludeChildUrls = true;
 
     protected WebLoader<Document> webLoader;
     protected WebParser<Document> webParser;
@@ -33,7 +33,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     }
 
     @Override
-    public abstract void crawl(String urlToCrawl, boolean includeChildUrls);
+    public abstract void crawl(String urlToCrawl, boolean excludeChildUrls);
 
     protected abstract void crawlUrl(String urlToCrawl);
 
@@ -42,9 +42,9 @@ public abstract class AbstractWebCrawler implements WebCrawler {
         return this.domainToCrawl;
     }
 
-    //TODO handle exceptions
     protected void setDomainToCrawl(String urlToCrawl) throws URISyntaxException {
-        this.domainToCrawl = new URI(urlToCrawl.toLowerCase()).getHost();
+        URI uriToCrawl = new URI(urlToCrawl.toLowerCase());
+        this.domainToCrawl = uriToCrawl.getHost();
         LOGGER.info("Setting domain to crawl {domainToCrawl}", domainToCrawl);
     }
 
@@ -69,11 +69,11 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     }
 
 
-    protected boolean shouldChildUrlsBeIncluded() {
-        return includeChildUrls;
+    protected boolean shouldExcludeChildUrls() {
+        return excludeChildUrls;
     }
 
-    protected void setIncludeChildUrls(boolean includeChildUrls) {
-        this.includeChildUrls = includeChildUrls;
+    protected void setExcludeChildUrls(boolean excludeChildUrls) {
+        this.excludeChildUrls = excludeChildUrls;
     }
 }

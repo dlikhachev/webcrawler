@@ -22,14 +22,14 @@ public class SimpleWebCrawler extends AbstractWebCrawler {
     }
 
     @Override
-    public void crawl(String urlToCrawl, boolean includeChildUrls) {
+    public void crawl(String urlToCrawl, boolean excludeChildUrls) {
         LOGGER.info("Starting crawling url {}", urlToCrawl);
 
-        dataPrinter.print(String.format("Starting crawling %s, include child urls: %b ...", urlToCrawl, includeChildUrls));
+        dataPrinter.print(String.format("Starting crawling %s, excluding child urls: %b ...", urlToCrawl, excludeChildUrls));
 
         try {
             this.setDomainToCrawl(urlToCrawl);
-            this.setIncludeChildUrls(includeChildUrls);
+            this.setExcludeChildUrls(excludeChildUrls);
             crawlUrl(urlToCrawl);
         } catch (URISyntaxException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
@@ -60,7 +60,7 @@ public class SimpleWebCrawler extends AbstractWebCrawler {
         if (urlData != null) {
             dataPrinter.print(urlData);
 
-            if (this.shouldChildUrlsBeIncluded()) {
+            if (!this.shouldExcludeChildUrls()) {
                 ArrayList<String> urls = urlData.getChildUrls();
                 urls.parallelStream().
                         filter(this::isUrlBelongsToDomainToCrawl).
