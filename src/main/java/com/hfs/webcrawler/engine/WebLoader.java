@@ -1,6 +1,6 @@
 package com.hfs.webcrawler.engine;
 
-import com.hfs.webcrawler.data.UrlData;
+import com.hfs.webcrawler.engine.data.UrlData;
 
 import java.io.IOException;
 

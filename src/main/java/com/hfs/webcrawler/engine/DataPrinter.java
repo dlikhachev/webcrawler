@@ -1,11 +1,15 @@
 package com.hfs.webcrawler.engine;
 
 
-import com.hfs.webcrawler.data.UrlData;
+import com.hfs.webcrawler.engine.data.UrlData;
 
 public interface DataPrinter<T> {
 
-    void print(String text);
+    void startPrinting(String text);
 
-    void print(UrlData<T> urlData);
+    void finishPrinting(String text);
+
+    void printElement(UrlData<T> urlData);
+
+    void printDelimiter();
 }

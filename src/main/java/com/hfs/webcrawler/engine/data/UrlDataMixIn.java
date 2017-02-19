@@ -1,4 +1,4 @@
-package com.hfs.webcrawler.data;
+package com.hfs.webcrawler.engine.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,9 +1,8 @@
-package com.hfs.webcrawler.engine.impl;
+package com.hfs.webcrawler.engine.crawlers;
 
 
 import com.google.common.base.Strings;
-import com.hfs.webcrawler.data.UrlData;
-import com.hfs.webcrawler.engine.AbstractWebCrawler;
+import com.hfs.webcrawler.engine.data.UrlData;
 import com.hfs.webcrawler.engine.DataPrinter;
 import com.hfs.webcrawler.engine.WebLoader;
 import com.hfs.webcrawler.engine.WebParser;
@@ -25,7 +24,7 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
     public void crawl(String urlToCrawl, boolean excludeChildUrls) {
         LOGGER.info("Starting crawling url {}", urlToCrawl);
 
-        dataPrinter.print(String.format("Starting crawling %s, excluding child urls: %b ...", urlToCrawl, excludeChildUrls));
+        dataPrinter.startPrinting(String.format("Starting crawling %s, excluding child urls: %b ... \n", urlToCrawl, excludeChildUrls));
 
         try {
             this.setHostToCrawl(urlToCrawl);
@@ -33,16 +32,15 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
             crawlUrl(urlToCrawl);
         } catch (URISyntaxException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
-            dataPrinter.print(String.format("Can't get domain from url %s", urlToCrawl));
+            dataPrinter.finishPrinting(String.format("Can't get domain from url %s", urlToCrawl));
         }
 
-        dataPrinter.print("Finished crawling.");
+        dataPrinter.finishPrinting("\n Finished crawling");
     }
 
     @Override
     protected void crawlUrl(String urlToCrawl) {
         if (Strings.isNullOrEmpty(urlToCrawl) || this.getHostToCrawl() == null) {
-            dataPrinter.print(String.format("Empty url for crawling: %s. Skipping ...", urlToCrawl));
             return;
         }
 
@@ -54,11 +52,11 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
             urlData = webParser.parse(urlData);
         } catch (IOException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
-            dataPrinter.print(String.format("Can't get data for: %s. Skipping ...", urlToCrawl));
+            dataPrinter.printElement(urlData);
         }
 
         if (urlData != null) {
-            dataPrinter.print(urlData);
+            dataPrinter.printElement(urlData);
 
             if (!this.shouldExcludeChildUrls()) {
                 ArrayList<String> urls = urlData.getChildUrls();

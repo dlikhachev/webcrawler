@@ -1,9 +1,9 @@
 package com.hfs.webcrawler;
 
-import com.hfs.webcrawler.engine.impl.ConsoleDataPrinter;
-import com.hfs.webcrawler.engine.impl.DefaultWebCrawler;
-import com.hfs.webcrawler.engine.impl.JSoupWebLoader;
-import com.hfs.webcrawler.engine.impl.JSoupWebParser;
+import com.hfs.webcrawler.engine.printers.JsonConsoleDataPrinter;
+import com.hfs.webcrawler.engine.crawlers.DefaultWebCrawler;
+import com.hfs.webcrawler.engine.bolts.jsoup.JSoupWebLoader;
+import com.hfs.webcrawler.engine.bolts.jsoup.JSoupWebParser;
 import org.apache.commons.cli.*;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("java -jar web-crawler.jar [params]", options);
+            formatter.printHelp("java -jar web-crawlers.jar [params]", options);
 
             System.exit(1);
             return;
@@ -30,7 +30,7 @@ public class Main {
         DefaultWebCrawler webCrawler = new DefaultWebCrawler(
                 new JSoupWebLoader(),
                 new JSoupWebParser(),
-                new ConsoleDataPrinter());
+                new JsonConsoleDataPrinter());
 
         webCrawler.crawl(urlToCrawl, excludeChildUrls);
     }

@@ -1,6 +1,6 @@
-package com.hfs.webcrawler.engine.impl;
+package com.hfs.webcrawler.engine.bolts.jsoup;
 
-import com.hfs.webcrawler.data.UrlData;
+import com.hfs.webcrawler.engine.data.UrlData;
 import com.hfs.webcrawler.engine.WebParser;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

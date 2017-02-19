@@ -1,7 +1,11 @@
-package com.hfs.webcrawler.engine;
+package com.hfs.webcrawler.engine.crawlers;
 
 
 import com.google.common.base.Strings;
+import com.hfs.webcrawler.engine.DataPrinter;
+import com.hfs.webcrawler.engine.WebCrawler;
+import com.hfs.webcrawler.engine.WebLoader;
+import com.hfs.webcrawler.engine.WebParser;
 import com.hfs.webcrawler.support.Utils;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
@@ -13,16 +17,16 @@ import java.util.ArrayList;
 
 public abstract class AbstractWebCrawler implements WebCrawler {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractWebCrawler.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(AbstractWebCrawler.class);
 
     private String hostToCrawl = null;
     private ArrayList<String> visitedUrls = new ArrayList<>();
 
     private boolean excludeChildUrls = true;
 
-    protected WebLoader<Document> webLoader;
-    protected WebParser<Document> webParser;
-    protected DataPrinter<Document> dataPrinter;
+    WebLoader<Document> webLoader;
+    WebParser<Document> webParser;
+    DataPrinter<Document> dataPrinter;
 
 
     public AbstractWebCrawler(WebLoader<Document> webLoader,
@@ -39,21 +43,21 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     protected abstract void crawlUrl(String urlToCrawl);
 
 
-    protected String getHostToCrawl() {
+    String getHostToCrawl() {
         return this.hostToCrawl;
     }
 
-    protected void setHostToCrawl(String urlToCrawl) throws URISyntaxException {
+    void setHostToCrawl(String urlToCrawl) throws URISyntaxException {
         URI uri = new URI(Utils.addDefaultProtocolToUrl(urlToCrawl));
         this.hostToCrawl = uri.getHost().toLowerCase();
         LOGGER.info("Setting host to crawl {hostToCrawl}", hostToCrawl);
     }
 
-    protected boolean isUrlBelongsToHostToCrawl(String url) {
+    boolean isUrlBelongsToHostToCrawl(String url) {
         return !Strings.isNullOrEmpty(url) && url.toLowerCase().contains(this.hostToCrawl);
     }
 
-    protected void addToVisitedUrls(String urlToAdd) {
+    void addToVisitedUrls(String urlToAdd) {
         if (!Strings.isNullOrEmpty(urlToAdd)) {
             String url = Utils.addDefaultProtocolToUrl(urlToAdd.toLowerCase());
             if (!visitedUrls.contains(url))
@@ -61,7 +65,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
         }
     }
 
-    protected boolean isUrlNotVisited(String url) {
+    boolean isUrlNotVisited(String url) {
         return !Strings.isNullOrEmpty(url) && !visitedUrls.contains(url.toLowerCase());
     }
 
@@ -70,11 +74,11 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     }
 
 
-    protected boolean shouldExcludeChildUrls() {
+    boolean shouldExcludeChildUrls() {
         return excludeChildUrls;
     }
 
-    protected void setExcludeChildUrls(boolean excludeChildUrls) {
+    void setExcludeChildUrls(boolean excludeChildUrls) {
         this.excludeChildUrls = excludeChildUrls;
     }
 }
