@@ -1,4 +1,4 @@
-package com.hfs.webcrawler.engine.simple;
+package com.hfs.webcrawler.engine.impl;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;

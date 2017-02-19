@@ -1,9 +1,9 @@
 package com.hfs.webcrawler;
 
-import com.hfs.webcrawler.engine.simple.ConsoleDataPrinter;
-import com.hfs.webcrawler.engine.simple.SimpleWebCrawler;
-import com.hfs.webcrawler.engine.simple.SimpleWebLoader;
-import com.hfs.webcrawler.engine.simple.SimpleWebParser;
+import com.hfs.webcrawler.engine.impl.ConsoleDataPrinter;
+import com.hfs.webcrawler.engine.impl.DefaultWebCrawler;
+import com.hfs.webcrawler.engine.impl.JSoupWebLoader;
+import com.hfs.webcrawler.engine.impl.JSoupWebParser;
 import org.apache.commons.cli.*;
 
 public class Main {
@@ -27,9 +27,9 @@ public class Main {
         String urlToCrawl = cmd.getOptionValue("urlToCrawl");
         boolean excludeChildUrls = cmd.hasOption("excludeChildUrls");
 
-        SimpleWebCrawler webCrawler = new SimpleWebCrawler(
-                new SimpleWebLoader(),
-                new SimpleWebParser(),
+        DefaultWebCrawler webCrawler = new DefaultWebCrawler(
+                new JSoupWebLoader(),
+                new JSoupWebParser(),
                 new ConsoleDataPrinter());
 
         webCrawler.crawl(urlToCrawl, excludeChildUrls);

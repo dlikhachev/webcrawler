@@ -1,8 +1,7 @@
-package com.hfs.webcrawler.engine.simple;
+package com.hfs.webcrawler.engine.impl;
 
 import com.hfs.webcrawler.data.UrlData;
 import com.hfs.webcrawler.engine.WebParser;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 
-public class SimpleWebParser implements WebParser<Document> {
+public class JSoupWebParser implements WebParser<Document> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleWebParser.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JSoupWebParser.class);
 
     @Override
     public UrlData<Document> parse(UrlData<Document> urlData) throws IOException {

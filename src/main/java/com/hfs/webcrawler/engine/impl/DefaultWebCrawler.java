@@ -1,4 +1,4 @@
-package com.hfs.webcrawler.engine.simple;
+package com.hfs.webcrawler.engine.impl;
 
 
 import com.google.common.base.Strings;
@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class SimpleWebCrawler extends AbstractWebCrawler {
+public class DefaultWebCrawler extends AbstractWebCrawler {
 
-    public SimpleWebCrawler(WebLoader<Document> webLoader,
-                            WebParser<Document> webParser,
-                            DataPrinter<Document> dataPrinter) {
+    public DefaultWebCrawler(WebLoader<Document> webLoader,
+                             WebParser<Document> webParser,
+                             DataPrinter<Document> dataPrinter) {
         super(webLoader, webParser, dataPrinter);
     }
 
