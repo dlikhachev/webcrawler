@@ -2,6 +2,7 @@ package com.hfs.webcrawler.engine;
 
 
 import com.google.common.base.Strings;
+import com.hfs.webcrawler.support.Utils;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractWebCrawler.class);
 
-    private String domainToCrawl = null;
+    private String hostToCrawl = null;
     private ArrayList<String> visitedUrls = new ArrayList<>();
 
     private boolean excludeChildUrls = true;
@@ -38,23 +39,23 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     protected abstract void crawlUrl(String urlToCrawl);
 
 
-    protected String getDomainToCrawl() {
-        return this.domainToCrawl;
+    protected String getHostToCrawl() {
+        return this.hostToCrawl;
     }
 
-    protected void setDomainToCrawl(String urlToCrawl) throws URISyntaxException {
-        URI uriToCrawl = new URI(urlToCrawl.toLowerCase());
-        this.domainToCrawl = uriToCrawl.getHost();
-        LOGGER.info("Setting domain to crawl {domainToCrawl}", domainToCrawl);
+    protected void setHostToCrawl(String urlToCrawl) throws URISyntaxException {
+        URI uri = new URI(Utils.addDefaultProtocolToUrl(urlToCrawl));
+        this.hostToCrawl = uri.getHost().toLowerCase();
+        LOGGER.info("Setting host to crawl {hostToCrawl}", hostToCrawl);
     }
 
-    protected boolean isUrlBelongsToDomainToCrawl(String url) {
-        return !Strings.isNullOrEmpty(url) && url.toLowerCase().contains(this.domainToCrawl);
+    protected boolean isUrlBelongsToHostToCrawl(String url) {
+        return !Strings.isNullOrEmpty(url) && url.toLowerCase().contains(this.hostToCrawl);
     }
 
     protected void addToVisitedUrls(String urlToAdd) {
         if (!Strings.isNullOrEmpty(urlToAdd)) {
-            String url = urlToAdd.toLowerCase();
+            String url = Utils.addDefaultProtocolToUrl(urlToAdd.toLowerCase());
             if (!visitedUrls.contains(url))
                 visitedUrls.add(url);
         }

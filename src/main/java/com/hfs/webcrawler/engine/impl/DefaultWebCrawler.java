@@ -28,7 +28,7 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
         dataPrinter.print(String.format("Starting crawling %s, excluding child urls: %b ...", urlToCrawl, excludeChildUrls));
 
         try {
-            this.setDomainToCrawl(urlToCrawl);
+            this.setHostToCrawl(urlToCrawl);
             this.setExcludeChildUrls(excludeChildUrls);
             crawlUrl(urlToCrawl);
         } catch (URISyntaxException e) {
@@ -41,7 +41,7 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
 
     @Override
     protected void crawlUrl(String urlToCrawl) {
-        if (Strings.isNullOrEmpty(urlToCrawl) || this.getDomainToCrawl() == null) {
+        if (Strings.isNullOrEmpty(urlToCrawl) || this.getHostToCrawl() == null) {
             dataPrinter.print(String.format("Empty url for crawling: %s. Skipping ...", urlToCrawl));
             return;
         }
@@ -63,7 +63,7 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
             if (!this.shouldExcludeChildUrls()) {
                 ArrayList<String> urls = urlData.getChildUrls();
                 urls.parallelStream().
-                        filter(this::isUrlBelongsToDomainToCrawl).
+                        filter(this::isUrlBelongsToHostToCrawl).
                         filter(this::isUrlNotVisited).
                         forEach(this::crawlUrl);
             }

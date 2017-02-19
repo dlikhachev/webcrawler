@@ -38,7 +38,7 @@ public class Main {
     private static Options getOptions() {
         Options options = new Options();
 
-        Option urlToCrawl = new Option("urlToCrawl", true, "url to crawl");
+        Option urlToCrawl = new Option("urlToCrawl", true, "http url to crawl");
         urlToCrawl.setRequired(true);
         options.addOption(urlToCrawl);
 

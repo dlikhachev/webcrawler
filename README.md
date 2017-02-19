@@ -6,7 +6,7 @@ Command line utility to get assets from url.
 
 To compile run `maven` command in the `project_directiry`:
 ```
-mvn clean install
+mvn clean package
 ```
 now you have `[project_directory]/target/web-crawler-1.0.jar` file.
 
