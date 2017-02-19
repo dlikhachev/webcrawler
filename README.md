@@ -20,16 +20,16 @@ now you have `[project_directory]/target/web-crawler-1.0.jar` file.
 #### Running application
 To run application execute the following command:
 ```
-java -jar web-crawler-1.0.jar -DstartUrl=[url] -DincludeChildUrls=[true|false]
+java -jar web-crawler-1.0.jar [parameters]
 ```
 
 where: 
-- `startUrl` - www url for crawling, string, required;
-- `includeChildUrls` - crawl down the child links or not, boolean, optional; 
+- `urlToCrawl` - www url for crawling, string, required;
+- `excludeChildUrls` - exclude child urls from crawling, boolean, optional; 
 
 Example: 
 ```
-java -jar web-crawler-1.0.jar -DstartUrl=www.gocarless.com -DincludeChildUrls=true
+java -jar web-crawler-1.0.jar -urlToCrawl www.gocarless.com -excludeChildUrls
 
 ```
 

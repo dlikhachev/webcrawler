@@ -42,7 +42,7 @@ public class Main {
         urlToCrawl.setRequired(true);
         options.addOption(urlToCrawl);
 
-        Option excludeChildUrls = new Option("excludeChildUrls", false, "include child pages");
+        Option excludeChildUrls = new Option("excludeChildUrls", false, "exclude child urls from crawling");
         excludeChildUrls.setRequired(false);
         options.addOption(excludeChildUrls);
         return options;
