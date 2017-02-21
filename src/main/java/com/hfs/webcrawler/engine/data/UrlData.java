@@ -5,13 +5,30 @@ import com.google.common.base.Strings;
 
 import java.util.ArrayList;
 
+/**
+ * Data structure to keep url data
+ *
+ * @param <T> class of the object that holds downloaded data
+ */
 public class UrlData<T> {
 
+    /**
+     * Url, which data is loaded and parsed
+     */
     private String url;
+    /**
+     * Raw data,loaded from url
+     */
     private T urlData;
+    /**
+     * List of child urls parsed from url data
+     */
     private ArrayList<String> childUrls;
-
+    /**
+     * List of assets parsed from url data
+     */
     private ArrayList<String> assets;
+
 
     public UrlData() {
         this.childUrls = new ArrayList<>();

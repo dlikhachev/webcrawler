@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class JSoupWebLoaderTest extends BaseTest {
+public class UtilsTest extends BaseTest {
 
     @Test
     public void testAddDefaultProtocolToUrl() throws IOException {

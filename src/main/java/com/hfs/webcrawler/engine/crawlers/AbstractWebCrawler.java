@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+
 public abstract class AbstractWebCrawler implements WebCrawler {
 
     static final Logger LOGGER = LoggerFactory.getLogger(AbstractWebCrawler.class);

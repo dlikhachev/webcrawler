@@ -14,7 +14,6 @@ import java.io.IOException;
 import static org.mockito.Mockito.when;
 
 class BaseTest {
-
     String baseUri = "http://www.gocardless.com";
     String baseUriWithoutProtocol = "www.gocardless.com";
     String baseUriSecured = "https://www.gocardless.com";

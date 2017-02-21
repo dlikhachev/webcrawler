@@ -1,9 +1,16 @@
 package com.hfs.webcrawler.engine;
 
 
-import java.net.URISyntaxException;
-
+/**
+ * Web Crawler interface
+ */
 public interface WebCrawler {
 
-    void crawl(String urlToCrawl, boolean includeChildUrls) throws URISyntaxException;
+    /**
+     * Start web crawling
+     *
+     * @param urlToCrawl       url to start crawling
+     * @param includeChildUrls include or exclude child urls from crawling
+     */
+    void crawl(String urlToCrawl, boolean includeChildUrls);
 }

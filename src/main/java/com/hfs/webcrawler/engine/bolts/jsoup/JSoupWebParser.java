@@ -16,7 +16,7 @@ public class JSoupWebParser implements WebParser<Document> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JSoupWebParser.class);
 
     @Override
-    public UrlData<Document> parse(UrlData<Document> data) throws IOException {
+    public UrlData<Document> parse(UrlData<Document> data) {
         LOGGER.info("Parsing url {url}", data.getUrl());
 
         Document document = data.getUrlData();
