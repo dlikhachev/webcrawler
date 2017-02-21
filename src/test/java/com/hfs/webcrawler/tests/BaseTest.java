@@ -13,18 +13,20 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.when;
 
-public class BaseTest {
+class BaseTest {
 
-    protected String baseUri = "http://www.gocardless.com";
-    protected String child1Url = "/page1.html";
-    protected String asset1Name = "/js/script.js";
-    protected String mainPageHtml = "<html><head><script src='" + asset1Name + "'></script></head><body><a href='" + child1Url + "'></a></body></html>";
-    protected String child1PageHtml = "<html><head></head><body></body></html>";
+    String baseUri = "http://www.gocardless.com";
+    String baseUriWithoutProtocol = "www.gocardless.com";
+    String baseUriSecured = "https://www.gocardless.com";
+    String child1Url = "/page1.html";
+    String asset1Name = "/js/script.js";
+    private String mainPageHtml = "<html><head><script src='" + asset1Name + "'></script></head><body><a href='" + child1Url + "'></a></body></html>";
+    private String child1PageHtml = "<html><head></head><body></body></html>";
 
     UrlData<Document> mainPageData;
     UrlData<Document> child1PageData;
 
-    protected void prepareData() {
+    private void prepareData() {
         mainPageData = new UrlData<>();
         mainPageData.setUrl(baseUri);
         mainPageData.setUrlData(Jsoup.parse(mainPageHtml, baseUri));
@@ -34,7 +36,7 @@ public class BaseTest {
         child1PageData.setUrlData(Jsoup.parse(child1PageHtml, baseUri));
     }
 
-    protected DefaultWebCrawler prepareCrawler() throws IOException {
+    DefaultWebCrawler prepareCrawler() throws IOException {
         prepareData();
         JSoupWebLoader loader = Mockito.mock(JSoupWebLoader.class);
         when(loader.load(baseUri)).thenReturn(mainPageData);
@@ -42,7 +44,7 @@ public class BaseTest {
         return new DefaultWebCrawler(loader, new JSoupWebParser(), new JsonConsoleDataPrinter());
     }
 
-    protected JSoupWebParser prepareParser() {
+    JSoupWebParser prepareParser() {
         prepareData();
         return new JSoupWebParser();
     }
