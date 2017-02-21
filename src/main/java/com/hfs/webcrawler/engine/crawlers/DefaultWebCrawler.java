@@ -1,7 +1,6 @@
 package com.hfs.webcrawler.engine.crawlers;
 
 
-import com.google.common.base.Strings;
 import com.hfs.webcrawler.engine.data.UrlData;
 import com.hfs.webcrawler.engine.DataPrinter;
 import com.hfs.webcrawler.engine.WebLoader;
@@ -24,37 +23,39 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
     public void crawl(String urlToCrawl, boolean excludeChildUrls) {
         LOGGER.info("Starting crawling url {}", urlToCrawl);
 
-        dataPrinter.startPrinting(String.format("Starting crawling %s, excluding child urls: %b ... \n", urlToCrawl, excludeChildUrls));
+        printer.startPrinting(String.format("Starting crawling %s, excluding child urls: %b ... \n", urlToCrawl, excludeChildUrls));
 
         try {
             this.setHostToCrawl(urlToCrawl);
             this.setExcludeChildUrls(excludeChildUrls);
+            this.resetVisitedUrls();
             crawlUrl(urlToCrawl);
         } catch (URISyntaxException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
-            dataPrinter.finishPrinting(String.format("Can't get domain from url %s", urlToCrawl));
+            printer.finishPrinting(String.format("Can't get domain from url %s", urlToCrawl));
         }
 
-        dataPrinter.finishPrinting("\n Finished crawling");
+        printer.finishPrinting("\n Finished crawling");
     }
 
     @Override
     protected void crawlUrl(String urlToCrawl) {
         this.addToVisitedUrls(urlToCrawl);
-
-        dataPrinter.printDelimiter();
+        if (getVisitedUrls().size() > 1) {
+            printer.printDelimiter();
+        }
 
         UrlData<Document> urlData = null;
         try {
-            urlData = webLoader.load(urlToCrawl);
-            urlData = webParser.parse(urlData);
+            urlData = loader.load(urlToCrawl);
+            urlData = parser.parse(urlData);
         } catch (IOException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
-            dataPrinter.printElement(urlData);
+            printer.printElement(urlData);
         }
 
         if (urlData != null) {
-            dataPrinter.printElement(urlData);
+            printer.printElement(urlData);
 
             if (!this.shouldExcludeChildUrls()) {
                 ArrayList<String> urls = urlData.getChildUrls();

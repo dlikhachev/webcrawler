@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class WebLoaderTest {
+public class JSoupWebLoaderTest {
 
     @Test
-    public void testDataLoadResponseFormat() throws IOException {
+    public void testLoadResponseFormat() throws IOException {
         JSoupWebLoader webLoader = new JSoupWebLoader();
         UrlData<Document> urlData = webLoader.load("www.gocardless.com");
         Assert.assertNotNull(urlData);

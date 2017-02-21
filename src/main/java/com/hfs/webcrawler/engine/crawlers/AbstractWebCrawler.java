@@ -24,17 +24,17 @@ public abstract class AbstractWebCrawler implements WebCrawler {
 
     private boolean excludeChildUrls = true;
 
-    WebLoader<Document> webLoader;
-    WebParser<Document> webParser;
-    DataPrinter<Document> dataPrinter;
+    WebLoader<Document> loader;
+    WebParser<Document> parser;
+    DataPrinter<Document> printer;
 
 
-    public AbstractWebCrawler(WebLoader<Document> webLoader,
-                              WebParser<Document> webParser,
-                              DataPrinter<Document> dataPrinter) {
-        this.webLoader = webLoader;
-        this.webParser = webParser;
-        this.dataPrinter = dataPrinter;
+    public AbstractWebCrawler(WebLoader<Document> loader,
+                              WebParser<Document> parser,
+                              DataPrinter<Document> printer) {
+        this.loader = loader;
+        this.parser = parser;
+        this.printer = printer;
     }
 
     @Override
@@ -63,6 +63,10 @@ public abstract class AbstractWebCrawler implements WebCrawler {
             if (!visitedUrls.contains(url))
                 visitedUrls.add(url);
         }
+    }
+
+    void resetVisitedUrls() {
+        visitedUrls.clear();
     }
 
     boolean isUrlNotVisited(String url) {

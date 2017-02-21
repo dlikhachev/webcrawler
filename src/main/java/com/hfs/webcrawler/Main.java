@@ -27,12 +27,12 @@ public class Main {
         String urlToCrawl = cmd.getOptionValue("urlToCrawl");
         boolean excludeChildUrls = cmd.hasOption("excludeChildUrls");
 
-        DefaultWebCrawler webCrawler = new DefaultWebCrawler(
+        DefaultWebCrawler crawler = new DefaultWebCrawler(
                 new JSoupWebLoader(),
                 new JSoupWebParser(),
                 new JsonConsoleDataPrinter());
 
-        webCrawler.crawl(urlToCrawl, excludeChildUrls);
+        crawler.crawl(urlToCrawl, excludeChildUrls);
     }
 
     private static Options getOptions() {

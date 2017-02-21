@@ -16,32 +16,32 @@ public class JSoupWebParser implements WebParser<Document> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JSoupWebParser.class);
 
     @Override
-    public UrlData<Document> parse(UrlData<Document> urlData) throws IOException {
-        LOGGER.info("Parsing url {url}", urlData.getUrl());
+    public UrlData<Document> parse(UrlData<Document> data) throws IOException {
+        LOGGER.info("Parsing url {url}", data.getUrl());
 
-        Document document = urlData.getUrlData();
-        fetchAssets(document, urlData);
-        fetchChildUrls(document, urlData);
+        Document document = data.getUrlData();
+        fetchAssets(document, data);
+        fetchChildUrls(document, data);
 
-        return urlData;
+        return data;
     }
 
-    private void fetchAssets(Document document, UrlData urlData) {
+    private void fetchAssets(Document document, UrlData data) {
         Elements media = document.select("[src]");
         for (Element link : media) {
-            urlData.addToAssets(link.attr("abs:src"));
+            data.addToAssets(link.attr("abs:src"));
         }
 
         Elements imports = document.select("link[href]");
         for (Element link : imports) {
-            urlData.addToAssets(link.attr("abs:href"));
+            data.addToAssets(link.attr("abs:href"));
         }
     }
 
-    private void fetchChildUrls(Document document, UrlData urlData) {
+    private void fetchChildUrls(Document document, UrlData data) {
         Elements links = document.select("a[href]");
         for (Element link : links) {
-            urlData.addToChildUrls(link.attr("abs:href"));
+            data.addToChildUrls(link.attr("abs:href"));
         }
     }
 }

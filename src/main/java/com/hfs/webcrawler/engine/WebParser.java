@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface WebParser<T> {
 
-    UrlData<T> parse(UrlData<T> urlData) throws IOException;
+    UrlData<T> parse(UrlData<T> data) throws IOException;
 }

@@ -21,12 +21,12 @@ public class JSoupWebLoader implements WebLoader<Document> {
 
         url = Utils.addDefaultProtocolToUrl(url);
 
-        UrlData<Document> urlData = new UrlData<>();
-        urlData.setUrl(url);
+        UrlData<Document> data = new UrlData<>();
+        data.setUrl(url);
 
         Document document = Jsoup.connect(url).get();
-        urlData.setUrlData(document);
+        data.setUrlData(document);
 
-        return urlData;
+        return data;
     }
 }
