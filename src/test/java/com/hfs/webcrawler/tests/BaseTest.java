@@ -1,6 +1,5 @@
 package com.hfs.webcrawler.tests;
 
-import com.hfs.webcrawler.engine.WebCrawler;
 import com.hfs.webcrawler.engine.bolts.jsoup.JSoupWebLoader;
 import com.hfs.webcrawler.engine.bolts.jsoup.JSoupWebParser;
 import com.hfs.webcrawler.engine.crawlers.DefaultWebCrawler;
@@ -19,8 +18,8 @@ public class BaseTest {
     protected String baseUri = "http://www.gocardless.com";
     protected String child1Url = "/page1.html";
     protected String asset1Name = "/js/script.js";
-    protected String mainPageHtml = "<html><header><javascript src='" + asset1Name + "'><header><body><a href='" + child1Url + "'></html>";
-    protected String child1PageHtml = "<html><header><body></html>";
+    protected String mainPageHtml = "<html><head><script src='" + asset1Name + "'></script></head><body><a href='" + child1Url + "'></a></body></html>";
+    protected String child1PageHtml = "<html><head></head><body></body></html>";
 
     UrlData<Document> mainPageData;
     UrlData<Document> child1PageData;

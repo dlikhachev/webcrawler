@@ -17,9 +17,9 @@ public class DefaultWebCrawlerTest extends BaseTest {
         crawler.crawl(baseUri, false);
         List<String> visitedUrls = crawler.getVisitedUrls();
         Assert.assertNotNull(visitedUrls);
-        Assert.assertEquals(visitedUrls.size(), 2);
-        Assert.assertEquals(visitedUrls.get(0), baseUri);
-        Assert.assertEquals(visitedUrls.get(1), baseUri + child1Url);
+        Assert.assertEquals(2, visitedUrls.size());
+        Assert.assertEquals(baseUri, visitedUrls.get(0));
+        Assert.assertEquals(baseUri + child1Url, visitedUrls.get(1));
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DefaultWebCrawlerTest extends BaseTest {
         crawler.crawl(baseUri, true);
         List<String> visitedUrls = crawler.getVisitedUrls();
         Assert.assertNotNull(visitedUrls);
-        Assert.assertEquals(visitedUrls.size(), 1);
-        Assert.assertEquals(visitedUrls.get(0), baseUri);
+        Assert.assertEquals(1, visitedUrls.size());
+        Assert.assertEquals(baseUri, visitedUrls.get(0));
     }
 }

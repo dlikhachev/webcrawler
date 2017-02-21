@@ -16,9 +16,9 @@ public class JSoupWebParserTest extends BaseTest {
         JSoupWebParser parser = prepareParser();
         UrlData<Document> data = parser.parse(mainPageData);
         Assert.assertNotNull(data);
-        Assert.assertEquals(data.getChildUrls().size(), 1);
-        Assert.assertEquals(data.getChildUrls().get(0), baseUri + child1Url);
-        Assert.assertEquals(data.getAssets().size(), 1);
-        Assert.assertEquals(data.getAssets().get(0), baseUri + asset1Name);
+        Assert.assertEquals(1, data.getChildUrls().size());
+        Assert.assertEquals(baseUri + child1Url, data.getChildUrls().get(0));
+        Assert.assertEquals(1, data.getAssets().size());
+        Assert.assertEquals(baseUri + asset1Name, data.getAssets().get(0));
     }
 }
