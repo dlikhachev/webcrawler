@@ -29,7 +29,7 @@ where:
 
 Example: 
 ```
-java -jar web-crawler-1.0-jar-with-dependencies.jar -urlToCrawl www.gocarless.com -excludeChildUrls
+java -jar web-crawler-1.0-jar-with-dependencies.jar -urlToCrawl www.gocardless.com -excludeChildUrls
 
 ```
 
