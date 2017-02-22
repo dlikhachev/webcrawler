@@ -17,7 +17,7 @@ public class UrlData<T> {
      */
     private String url;
     /**
-     * Raw data,loaded from url
+     * Raw data, loaded from url
      */
     private T urlData;
     /**
@@ -52,6 +52,7 @@ public class UrlData<T> {
     public void setUrlData(T urlData) {
         this.urlData = urlData;
     }
+
 
     public ArrayList<String> getChildUrls() {
         return childUrls;

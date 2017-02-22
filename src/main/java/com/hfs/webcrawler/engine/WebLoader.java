@@ -13,6 +13,7 @@ public interface WebLoader<T> {
 
     /**
      * Load data from web
+     *
      * @param url url to load data from
      * @return object that holds loaded web data
      * @throws IOException when failed to build correct URI based on provided url

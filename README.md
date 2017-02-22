@@ -4,11 +4,11 @@ Command line utility to get assets from url.
 
 ## Compile application
 
-To compile run `maven` command in the `project_directiry`:
+To compile run `maven` command in the `project_directory`:
 ```
 mvn clean package
 ```
-now you have `[project_directory]/target/web-crawler-1.0.jar` file.
+now you have `[project_directory]/target/web-crawler-1.0-jar-with-dependencies.jar` file.
 
 
 ## Running application
@@ -20,7 +20,7 @@ now you have `[project_directory]/target/web-crawler-1.0.jar` file.
 #### Running application
 To run application execute the following command:
 ```
-java -jar web-crawler-1.0.jar [parameters]
+java -jar web-crawler-1.0-jar-with-dependencies.jar [parameters]
 ```
 
 where: 
@@ -29,7 +29,7 @@ where:
 
 Example: 
 ```
-java -jar web-crawler-1.0.jar -urlToCrawl www.gocarless.com -excludeChildUrls
+java -jar web-crawler-1.0-jar-with-dependencies.jar -urlToCrawl www.gocarless.com -excludeChildUrls
 
 ```
 

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+/**
+ * Default web crawler
+ */
 public class DefaultWebCrawler extends AbstractWebCrawler {
 
     public DefaultWebCrawler(WebLoader<Document> webLoader,

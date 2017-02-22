@@ -9,7 +9,7 @@ import org.apache.commons.cli.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Options options = getOptions();
+        Options options = buildOptions();
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
         CommandLine cmd;
@@ -18,7 +18,7 @@ public class Main {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
-            formatter.printHelp("java -jar web-crawlers.jar [params]", options);
+            formatter.printHelp("java -jar web-crawler-1.0-jar-with-dependencies.jar [params]", options);
 
             System.exit(1);
             return;
@@ -31,11 +31,10 @@ public class Main {
                 new JSoupWebLoader(),
                 new JSoupWebParser(),
                 new JsonConsoleDataPrinter());
-
         crawler.crawl(urlToCrawl, excludeChildUrls);
     }
 
-    private static Options getOptions() {
+    private static Options buildOptions() {
         Options options = new Options();
 
         Option urlToCrawl = new Option("urlToCrawl", true, "http url to crawl");

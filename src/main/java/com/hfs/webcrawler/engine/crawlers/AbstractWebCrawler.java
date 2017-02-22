@@ -15,14 +15,24 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-
+/**
+ * Base web crawler
+ */
 public abstract class AbstractWebCrawler implements WebCrawler {
 
     static final Logger LOGGER = LoggerFactory.getLogger(AbstractWebCrawler.class);
 
+    /**
+     * Url to crawl
+     */
     private String hostToCrawl = null;
+    /**
+     * List of already visited urls
+     */
     private ArrayList<String> visitedUrls = new ArrayList<>();
-
+    /**
+     * Exclude childs from crawling process
+     */
     private boolean excludeChildUrls = true;
 
     WebLoader<Document> loader;
@@ -41,6 +51,11 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     @Override
     public abstract void crawl(String urlToCrawl, boolean excludeChildUrls);
 
+    /**
+     * Main crawl logic
+     *
+     * @param urlToCrawl url to crawl
+     */
     protected abstract void crawlUrl(String urlToCrawl);
 
 
@@ -57,6 +72,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     boolean isUrlBelongsToHostToCrawl(String url) {
         return !Strings.isNullOrEmpty(url) && url.toLowerCase().contains(this.hostToCrawl);
     }
+
 
     void addToVisitedUrls(String urlToAdd) {
         if (!Strings.isNullOrEmpty(urlToAdd)) {

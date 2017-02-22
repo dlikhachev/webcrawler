@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 
+/**
+ * JSoup implementation of WebLoader
+ */
 public class JSoupWebLoader implements WebLoader<Document> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JSoupWebLoader.class);
