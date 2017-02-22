@@ -2,6 +2,8 @@ package com.hfs.webcrawler.engine;
 
 
 import com.hfs.webcrawler.engine.data.UrlData;
+import org.jsoup.nodes.Document;
+
 
 /**
  * Data printer interface
@@ -27,12 +29,19 @@ public interface DataPrinter<T> {
     /**
      * Print data element
      *
-     * @param urlData data element to print
+     * @param data data element to print
      */
-    void printElement(UrlData<T> urlData);
+    void printElement(UrlData<T> data);
 
     /**
      * Print delimiter between elements
      */
     void printDelimiter();
+
+    /**
+     * Print error
+     *
+     * @param data data element to print error for
+     */
+    void printError(UrlData<Document> data);
 }

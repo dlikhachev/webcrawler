@@ -16,14 +16,22 @@ public class UrlData<T> {
      * Url, which data is loaded and parsed
      */
     private String url;
+
     /**
      * Raw data, loaded from url
      */
-    private T urlData;
+    private T data;
+
+    /**
+     * Load error info, if loading failed;
+     */
+    private String loadingError = null;
+
     /**
      * List of child urls parsed from url data
      */
     private ArrayList<String> childUrls;
+
     /**
      * List of assets parsed from url data
      */
@@ -45,14 +53,22 @@ public class UrlData<T> {
     }
 
 
-    public T getUrlData() {
-        return urlData;
+    public T getData() {
+        return data;
     }
 
-    public void setUrlData(T urlData) {
-        this.urlData = urlData;
+    public void setData(T data) {
+        this.data = data;
     }
 
+
+    public String getLoadingError() {
+        return loadingError;
+    }
+
+    public void setLoadingError(String loadingError) {
+        this.loadingError = loadingError;
+    }
 
     public ArrayList<String> getChildUrls() {
         return childUrls;

@@ -20,7 +20,7 @@ public class JSoupWebParser implements WebParser<Document> {
     public UrlData<Document> parse(UrlData<Document> data) {
         LOGGER.info("Parsing url {url}", data.getUrl());
 
-        Document document = data.getUrlData();
+        Document document = data.getData();
         fetchAssets(document, data);
         fetchChildUrls(document, data);
 

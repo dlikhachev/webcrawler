@@ -36,10 +36,10 @@ public class JsonConsoleDataPrinter implements DataPrinter<Document> {
     }
 
     @Override
-    public void printElement(UrlData<Document> urlData) {
+    public void printElement(UrlData<Document> data) {
         try {
             objectMapper.addMixIn(UrlData.class, UrlDataMixIn.class);
-            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(urlData));
+            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data));
         } catch (JsonProcessingException e) {
             LOGGER.error(e.getLocalizedMessage(), e);
         }
@@ -48,5 +48,16 @@ public class JsonConsoleDataPrinter implements DataPrinter<Document> {
     @Override
     public void printDelimiter() {
         System.out.println(",");
+    }
+
+    @Override
+    public void printError(UrlData<Document> data) {
+        try {
+            objectMapper.addMixIn(UrlData.class, UrlDataMixIn.class);
+            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(data));
+        } catch (JsonProcessingException e) {
+            LOGGER.error(e.getLocalizedMessage(), e);
+        }
+
     }
 }

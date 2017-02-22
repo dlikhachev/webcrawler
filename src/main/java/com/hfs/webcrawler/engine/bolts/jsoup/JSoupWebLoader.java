@@ -19,16 +19,22 @@ public class JSoupWebLoader implements WebLoader<Document> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JSoupWebLoader.class);
 
     @Override
-    public UrlData<Document> load(String url) throws IOException {
-        LOGGER.info("Loading url {url}", url);
+    public UrlData<Document> load(String url) {
+        LOGGER.info("Loading url {}", url);
 
         url = Utils.addDefaultProtocolToUrl(url);
 
         UrlData<Document> data = new UrlData<>();
         data.setUrl(url);
 
-        Document document = Jsoup.connect(url).get();
-        data.setUrlData(document);
+        Document document = null;
+        try {
+            document = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+            data.setLoadingError(e.toString());
+        }
+        data.setData(document);
 
         return data;
     }

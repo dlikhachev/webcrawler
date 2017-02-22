@@ -28,11 +28,11 @@ class BaseTest {
     private void prepareData() {
         mainPageData = new UrlData<>();
         mainPageData.setUrl(baseUri);
-        mainPageData.setUrlData(Jsoup.parse(mainPageHtml, baseUri));
+        mainPageData.setData(Jsoup.parse(mainPageHtml, baseUri));
 
         child1PageData = new UrlData<>();
         child1PageData.setUrl(baseUri + child1Url);
-        child1PageData.setUrlData(Jsoup.parse(child1PageHtml, baseUri));
+        child1PageData.setData(Jsoup.parse(child1PageHtml, baseUri));
     }
 
     DefaultWebCrawler prepareCrawler() throws IOException {

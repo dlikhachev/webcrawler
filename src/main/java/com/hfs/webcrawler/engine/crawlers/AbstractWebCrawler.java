@@ -66,7 +66,7 @@ public abstract class AbstractWebCrawler implements WebCrawler {
     void setHostToCrawl(String urlToCrawl) throws URISyntaxException {
         URI uri = new URI(Utils.addDefaultProtocolToUrl(urlToCrawl));
         this.hostToCrawl = uri.getHost().toLowerCase();
-        LOGGER.info("Setting host to crawl {hostToCrawl}", hostToCrawl);
+        LOGGER.info("Setting host to crawl {}", hostToCrawl);
     }
 
     boolean isUrlBelongsToHostToCrawl(String url) {

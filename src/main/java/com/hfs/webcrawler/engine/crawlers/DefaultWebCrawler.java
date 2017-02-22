@@ -7,7 +7,6 @@ import com.hfs.webcrawler.engine.WebLoader;
 import com.hfs.webcrawler.engine.WebParser;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -48,25 +47,20 @@ public class DefaultWebCrawler extends AbstractWebCrawler {
             printer.printDelimiter();
         }
 
-        UrlData<Document> urlData = null;
-        try {
-            urlData = loader.load(urlToCrawl);
-            urlData = parser.parse(urlData);
-        } catch (IOException e) {
-            LOGGER.error(e.getLocalizedMessage(), e);
-            printer.printElement(urlData);
-        }
-
-        if (urlData != null) {
-            printer.printElement(urlData);
+        UrlData<Document> data = loader.load(urlToCrawl);
+        if (data.getData() != null) {
+            data = parser.parse(data);
+            printer.printElement(data);
 
             if (!this.shouldExcludeChildUrls()) {
-                ArrayList<String> urls = urlData.getChildUrls();
+                ArrayList<String> urls = data.getChildUrls();
                 urls.parallelStream().
                         filter(this::isUrlBelongsToHostToCrawl).
                         filter(this::isUrlNotVisited).
                         forEach(this::crawlUrl);
             }
+        } else {
+            printer.printError(data);
         }
     }
 }
